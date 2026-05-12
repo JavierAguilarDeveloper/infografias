@@ -1,0 +1,202 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;700&family=Azeret+Mono:wght@400;500&display=swap');
+
+  .ig { background:#080b10; border-radius:16px; overflow:hidden; font-family:'Familjen Grotesk',sans-serif; position:relative; max-width:680px; margin:0 auto; }
+  .blob1 { position:absolute; width:400px; height:400px; border-radius:50%; filter:blur(100px); background:rgba(232,100,58,0.13); top:-120px; right:-80px; pointer-events:none; }
+  .blob2 { position:absolute; width:280px; height:280px; border-radius:50%; filter:blur(80px); background:rgba(91,141,246,0.10); bottom:-60px; left:-40px; pointer-events:none; }
+
+  .inner { position:relative; z-index:1; padding:32px 32px 28px; }
+
+  /* TOP HEADER */
+  .top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px; }
+  .eyebrow { font-family:'Azeret Mono',monospace; font-size:10px; letter-spacing:0.16em; color:#e8643a; text-transform:uppercase; margin-bottom:8px; }
+  .headline { font-size:clamp(30px,5vw,46px); font-weight:700; line-height:1.0; color:#dde3f0; }
+  .headline em { color:#e8643a; font-style:italic; }
+  .subline { font-family:'Azeret Mono',monospace; font-size:11px; color:#8b93a8; letter-spacing:0.07em; margin-top:8px; }
+
+  /* ANGULAR HERO LOGO */
+  .angular-hero { display:flex; flex-direction:column; align-items:center; gap:6px; flex-shrink:0; }
+  .angular-hero svg { filter:drop-shadow(0 0 24px rgba(232,100,58,0.5)); }
+  .version-pill { font-family:'Azeret Mono',monospace; font-size:9px; letter-spacing:0.12em; color:#e8643a; background:rgba(232,100,58,0.1); border:1px solid rgba(232,100,58,0.3); padding:3px 10px; border-radius:100px; }
+
+  .divider { height:1px; background:rgba(255,255,255,0.07); margin-bottom:24px; }
+
+  /* REASONS GRID */
+  .reasons { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+
+  .rcard {
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:12px; padding:14px;
+    display:flex; align-items:flex-start; gap:12px;
+    transition:border-color 0.2s;
+  }
+  .rcard:hover { border-color:rgba(232,100,58,0.35); }
+
+  .tech-icon { flex-shrink:0; width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
+  .ti-ts  { background:rgba(49,120,198,0.15); border:1px solid rgba(49,120,198,0.25); }
+  .ti-rx  { background:rgba(180,20,100,0.15); border:1px solid rgba(180,20,100,0.25); }
+  .ti-ng  { background:rgba(232,100,58,0.12); border:1px solid rgba(232,100,58,0.25); }
+  .ti-str { background:rgba(91,141,246,0.12); border:1px solid rgba(91,141,246,0.25); }
+
+  .rc-num { font-family:'Azeret Mono',monospace; font-size:9px; color:#e8643a; letter-spacing:0.1em; margin-bottom:3px; }
+  .rc-title { font-size:13px; font-weight:700; color:#dde3f0; line-height:1.2; margin-bottom:2px; }
+  .rc-desc { font-size:11px; color:#8b93a8; line-height:1.4; }
+
+  /* VERDICT BAR */
+  .verdict {
+    background:rgba(232,100,58,0.07);
+    border:1px solid rgba(232,100,58,0.22);
+    border-radius:12px; padding:14px 18px;
+    display:flex; align-items:center; gap:16px;
+    margin-bottom:20px;
+  }
+  .verdict-icon { font-size:28px; flex-shrink:0; }
+  .verdict-text { font-size:12px; color:#dde3f0; line-height:1.6; }
+  .verdict-text strong { color:#e8643a; }
+
+  /* TECH STACK ROW */
+  .stack-row { display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .stack-label { font-family:'Azeret Mono',monospace; font-size:9px; color:#8b93a8; letter-spacing:0.12em; text-transform:uppercase; flex-shrink:0; }
+  .stack-chip {
+    display:flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:100px; padding:4px 10px;
+    font-family:'Azeret Mono',monospace; font-size:10px; color:#dde3f0;
+  }
+  .chip-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+
+  /* FOOTER */
+  .foot { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.07); padding-top:14px; }
+  .brand { font-family:'Azeret Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#e8643a; }
+  .hashtags { font-family:'Azeret Mono',monospace; font-size:9px; color:#5b8df6; letter-spacing:0.06em; }
+</style>
+
+<div class="ig">
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="inner">
+
+    <!-- HEADER -->
+    <div class="top">
+      <div>
+        <p class="eyebrow">// opinión · 2026</p>
+        <h1 class="headline">¿Angular está<br><em>muerto?</em></h1>
+        <p class="subline">4 razones por las que sigue dominando enterprise</p>
+      </div>
+      <!-- Angular Logo SVG -->
+      <div class="angular-hero">
+        <svg width="90" height="90" viewBox="0 0 250 250">
+          <polygon points="125,3 243,46 221,198 125,248 29,198 7,46" fill="#e8643a"/>
+          <polygon points="125,3 125,248 29,198 7,46" fill="rgba(0,0,0,0.15)"/>
+          <polygon points="125,30 125,30 71,190 91,190 102,161 148,161 159,190 179,190" fill="white"/>
+          <polygon points="125,75 142,130 108,130" fill="#e8643a"/>
+        </svg>
+        <span class="version-pill">v19 · 2026</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- RAZONES -->
+    <div class="reasons">
+
+      <div class="rcard">
+        <div class="tech-icon ti-ng">
+          <!-- Structure icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="7" height="7" rx="2" fill="#e8643a"/>
+            <rect x="14" y="3" width="7" height="7" rx="2" fill="rgba(232,100,58,0.5)"/>
+            <rect x="3" y="14" width="7" height="7" rx="2" fill="rgba(232,100,58,0.5)"/>
+            <rect x="14" y="14" width="7" height="7" rx="2" fill="rgba(232,100,58,0.3)"/>
+          </svg>
+        </div>
+        <div>
+          <div class="rc-num">01 —</div>
+          <div class="rc-title">Estructura desde día 1</div>
+          <div class="rc-desc">Módulos, servicios, DI. Arquitectura lista sin improvisar.</div>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="tech-icon ti-ts">
+          <!-- TypeScript logo -->
+          <svg width="26" height="26" viewBox="0 0 400 400">
+            <rect width="400" height="400" rx="50" fill="#3178C6"/>
+            <path d="M87 237v25c4 2 9 4 15 6s12 2 19 2c6 0 12-1 17-2s10-4 14-7 7-7 9-12 3-11 3-17c0-5 0-9-2-13s-3-7-5-10-6-6-10-8-8-5-13-7l-14-5c-4-1-7-3-10-4s-5-3-6-5-2-4-2-7c0-2 0-5 2-7s3-4 5-5 5-2 7-3 6-1 9-1c2 0 5 0 8 1l8 2c3 1 5 2 7 3s4 2 5 3V125c-3-2-8-3-13-4s-10-2-17-2c-6 0-12 1-17 2s-10 3-14 6-8 7-10 12-4 10-4 17c0 8 2 16 7 21s12 10 22 14l14 5c4 2 8 3 11 5s5 3 7 5 2 5 2 7c0 3 0 5-1 7s-3 4-5 6-5 3-8 3-6 1-10 1c-6 0-13-1-19-3s-13-6-17-9zm160-115h-51v-24H324v24h-51v148h-26V122z" fill="white"/>
+          </svg>
+        </div>
+        <div>
+          <div class="rc-num">02 —</div>
+          <div class="rc-title">TypeScript nativo</div>
+          <div class="rc-desc">No opcional. En el core. Indispensable en proyectos grandes.</div>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="tech-icon ti-ng">
+          <!-- Signals icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="3" fill="#e8643a"/>
+            <path d="M12 2 Q18 7 18 12 Q18 17 12 22" stroke="rgba(232,100,58,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M12 2 Q6 7 6 12 Q6 17 12 22" stroke="rgba(232,100,58,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M2 12 Q7 6 12 6 Q17 6 22 12" stroke="rgba(232,100,58,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M2 12 Q7 18 12 18 Q17 18 22 12" stroke="rgba(232,100,58,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="rc-num">03 —</div>
+          <div class="rc-title">Signals cambiaron todo</div>
+          <div class="rc-desc">Reactividad simple, menos boilerplate, mejor rendimiento.</div>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="tech-icon ti-rx">
+          <!-- RxJS logo -->
+          <svg width="28" height="28" viewBox="0 0 150 150">
+            <circle cx="75" cy="75" r="70" fill="none" stroke="#B4147C" stroke-width="8"/>
+            <circle cx="75" cy="75" r="42" fill="none" stroke="#B4147C" stroke-width="5" opacity="0.6"/>
+            <circle cx="75" cy="75" r="18" fill="#B4147C"/>
+            <line x1="75" y1="5" x2="75" y2="145" stroke="#B4147C" stroke-width="3" opacity="0.4"/>
+            <line x1="5" y1="75" x2="145" y2="75" stroke="#B4147C" stroke-width="3" opacity="0.4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="rc-num">04 —</div>
+          <div class="rc-title">RxJS + reactividad</div>
+          <div class="rc-desc">Flujos de datos complejos. Para enterprise, nada lo iguala.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VERDICT -->
+    <div class="verdict">
+      <div class="verdict-icon">🏦</div>
+      <div class="verdict-text">
+        <strong>La verdad incómoda:</strong> bancos, aseguradoras y gobiernos no corren en hype.<br>
+        Corren en Angular. Y así seguirá siendo.
+      </div>
+    </div>
+
+    <!-- TECH STACK CHIPS -->
+    <div class="stack-row">
+      <span class="stack-label">stack //</span>
+      <span class="stack-chip"><span class="chip-dot" style="background:#e8643a"></span>Angular</span>
+      <span class="stack-chip"><span class="chip-dot" style="background:#3178C6"></span>TypeScript</span>
+      <span class="stack-chip"><span class="chip-dot" style="background:#B4147C"></span>RxJS</span>
+      <span class="stack-chip"><span class="chip-dot" style="background:#5b8df6"></span>Signals</span>
+      <span class="stack-chip"><span class="chip-dot" style="background:#3dd68c"></span>Spring Boot</span>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="foot">
+      <span class="brand">javieraguilar.dev</span>
+      <span class="hashtags">#Angular · #FullStack · #TypeScript · #Enterprise</span>
+    </div>
+
+  </div>
+</div>
