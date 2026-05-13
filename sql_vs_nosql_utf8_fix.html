@@ -1,0 +1,172 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Azeret+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:#080b10;--bg2:#0e1117;--surface:#131720;--surface2:#1a1f2e;
+    --border:rgba(255,255,255,0.08);--fg:#dde3f0;--fg2:#8b93a8;
+    --accent:#e8643a;--accent2:#5b8df6;--green:#3dd68c;--tag-bg:rgba(255,255,255,0.05);
+    --ff:'Familjen Grotesk',sans-serif;--fm:'Azeret Mono',monospace;
+  }
+  .r{padding:1.5rem 0;font-family:var(--ff);background:transparent;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:660px;margin:0 auto;}
+  .top{padding:1.5rem 1.8rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+  .eyebrow{font-family:var(--fm);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg2);display:flex;align-items:center;gap:6px;margin-bottom:0.55rem;}
+  .title{font-family:var(--ff);font-size:2rem;font-weight:700;letter-spacing:-0.03em;color:var(--fg);line-height:1;margin-bottom:0.35rem;}
+  .title span{color:var(--accent);font-style:italic;font-weight:400;}
+  .sub{font-size:0.9rem;color:var(--fg2);line-height:1.5;}
+  .pill{display:flex;align-items:center;gap:6px;font-family:var(--fm);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg2);border:1px solid var(--border);padding:5px 12px;border-radius:100px;flex-shrink:0;white-space:nowrap;}
+  .gdot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);}
+  .cols{display:grid;grid-template-columns:1fr 1fr;}
+  .col{padding:1.3rem 1.6rem;}
+  .col:first-child{border-right:1px solid var(--border);}
+  .col-head{margin-bottom:1rem;padding-bottom:0.9rem;border-bottom:1px solid var(--border);}
+  .icon-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.65rem;}
+  .icon-wrap{width:38px;height:38px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:center;}
+  .tag{font-family:var(--fm);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--border);padding:4px 10px;border-radius:4px;color:var(--fg2);background:var(--tag-bg);}
+  .tag-sql{border-color:var(--accent2);color:var(--accent2);}
+  .tag-nosql{border-color:var(--accent);color:var(--accent);}
+  .col-name{font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;color:var(--fg);margin-bottom:0.2rem;}
+  .col-desc{font-family:var(--fm);font-size:0.66rem;letter-spacing:0.06em;color:var(--fg2);}
+  .sec{font-family:var(--fm);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg2);display:flex;align-items:center;gap:5px;margin:0.9rem 0 0.55rem;}
+  .feats{display:flex;flex-direction:column;gap:7px;}
+  .feat{display:flex;align-items:flex-start;gap:9px;font-size:0.87rem;color:var(--fg);line-height:1.45;}
+  .feat svg{flex-shrink:0;margin-top:2px;}
+  .pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:0.3rem;}
+  .tpill{font-family:var(--fm);font-size:0.64rem;letter-spacing:0.06em;padding:4px 10px;border-radius:100px;border:1px solid var(--border);color:var(--fg2);background:var(--tag-bg);}
+  .bottom{border-top:1px solid var(--border);padding:1.2rem 1.6rem;background:var(--surface2);}
+  .blabel{font-family:var(--fm);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg2);display:flex;align-items:center;gap:6px;margin-bottom:0.85rem;}
+  .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .case{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.7rem 0.85rem;display:flex;flex-direction:column;gap:5px;}
+  .case-head{display:flex;align-items:center;gap:6px;}
+  .ctype{font-family:var(--fm);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;}
+  .ct-sql{color:var(--accent2);}
+  .ct-nosql{color:var(--accent);}
+  .ctext{font-size:0.82rem;color:var(--fg2);line-height:1.4;}
+  .footer{border-top:1px solid var(--border);padding:0.9rem 1.6rem;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);}
+  .fright{display:flex;align-items:center;gap:6px;font-family:var(--fm);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg2);}
+</style>
+
+<div class="r">
+<div class="card">
+
+  <div class="top">
+    <div>
+      <div class="eyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+        // bases de datos &middot; comparativa
+      </div>
+      <div class="title">SQL <span>vs NoSQL.</span></div>
+      <div class="sub">&iquest;Cu&aacute;ndo elegir cada uno? Gu&iacute;a pr&aacute;ctica por casos de uso</div>
+    </div>
+    <div class="pill"><span class="gdot"></span>dev note</div>
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <div class="col-head">
+        <div class="icon-row">
+          <div class="icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+          </div>
+          <span class="tag tag-sql">Relacional</span>
+        </div>
+        <div class="col-name">SQL</div>
+        <div class="col-desc">Bases de datos relacionales</div>
+      </div>
+      <div class="sec">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        // caracter&iacute;sticas
+      </div>
+      <div class="feats">
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Esquema r&iacute;gido y definido</div>
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>Datos estructurados en tablas</div>
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 16v2a2 2 0 0 1-2 2H6l-3-3 3-3h10a2 2 0 0 1 2 2z"/><path d="M6 8V6a2 2 0 0 1 2-2h10l3 3-3 3H8a2 2 0 0 1-2-2z"/></svg>Relaciones entre tablas (JOIN)</div>
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Transacciones ACID</div>
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Escalado vertical</div>
+      </div>
+      <div class="sec">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        // stack
+      </div>
+      <div class="pills">
+        <span class="tpill">PostgreSQL</span><span class="tpill">MySQL</span><span class="tpill">Oracle</span><span class="tpill">SQL Server</span>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="col-head">
+        <div class="icon-row">
+          <div class="icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+          </div>
+          <span class="tag tag-nosql">No relacional</span>
+        </div>
+        <div class="col-name">NoSQL</div>
+        <div class="col-desc">Bases de datos no relacionales</div>
+      </div>
+      <div class="sec">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        // caracter&iacute;sticas
+      </div>
+      <div class="feats">
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>Esquema flexible o sin esquema</div>
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Documentos, clave-valor, grafos</div>
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Alta velocidad lectura/escritura</div>
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>Consistencia eventual (BASE)</div>
+        <div class="feat"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>Escalado horizontal nativo</div>
+      </div>
+      <div class="sec">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        // stack
+      </div>
+      <div class="pills">
+        <span class="tpill">MongoDB</span><span class="tpill">Redis</span><span class="tpill">Cassandra</span><span class="tpill">Firebase</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="blabel">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      // casos de uso reales
+    </div>
+    <div class="cases">
+      <div class="case">
+        <div class="case-head"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M10 8V6a2 2 0 1 1 4 0v2"/><line x1="12" y1="13" x2="12" y2="17"/></svg><span class="ctype ct-sql">SQL</span></div>
+        <div class="ctext">Sistema bancario o de pagos</div>
+      </div>
+      <div class="case">
+        <div class="case-head"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span class="ctype ct-sql">SQL</span></div>
+        <div class="ctext">ERP / CRM empresarial</div>
+      </div>
+      <div class="case">
+        <div class="case-head"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b8df6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span class="ctype ct-sql">SQL</span></div>
+        <div class="ctext">E-commerce con inventario</div>
+      </div>
+      <div class="case">
+        <div class="case-head"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="ctype ct-nosql">NoSQL</span></div>
+        <div class="ctext">Redes sociales y feeds</div>
+      </div>
+      <div class="case">
+        <div class="case-head"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="15" x2="4" y2="15"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="15" x2="22" y2="15"/></svg><span class="ctype ct-nosql">NoSQL</span></div>
+        <div class="ctext">IoT y logs en tiempo real</div>
+      </div>
+      <div class="case">
+        <div class="case-head"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><span class="ctype ct-nosql">NoSQL</span></div>
+        <div class="ctext">Apps m&oacute;viles y cach&eacute;</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="brand">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8643a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      javieraguilar.dev
+    </div>
+    <div class="fright"><span class="gdot"></span>Javier Aguilar &middot; Full Stack Dev</div>
+  </div>
+
+</div>
+</div>
