@@ -1,0 +1,267 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .download-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .download-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: #ffffff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 100px;
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #1a1a1a;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .download-btn:hover { background: #f0faf6; border-color: #5DCAA5; color: #0F6E56; }
+  .download-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .download-btn i { font-size: 16px; }
+
+  .card {
+    width: 540px;
+    margin: 0 auto;
+    background: #0a0d14;
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    position: relative;
+  }
+  .deco-circle {
+    position: absolute; top: -70px; right: -70px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: #1BAAC8; opacity: 0.38;
+    pointer-events: none; z-index: 0;
+  }
+  .deco-bottom {
+    position: absolute; bottom: -40px; left: -40px;
+    width: 120px; height: 120px; border-radius: 50%;
+    border: 0.5px solid rgba(93,202,165,0.15);
+    pointer-events: none; z-index: 0;
+  }
+  .body { position: relative; z-index: 1; padding: 2rem 1.75rem 1.5rem; }
+
+  .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.6rem; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 100px;
+    padding: 4px 12px; font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+  }
+  .chip-dot { width: 5px; height: 5px; border-radius: 50%; background: #5DCAA5; flex-shrink:0; }
+  .logo-duo { display: flex; align-items: center; }
+  .logo-circle { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .logo-circle.ang { background: rgba(221,0,49,0.13); border: 2px solid rgba(221,0,49,0.45); z-index:2; position:relative; }
+  .logo-circle.rea { background: rgba(97,218,251,0.09); border: 2px solid rgba(97,218,251,0.3); margin-left:-14px; z-index:1; position:relative; }
+
+  .headline { font-size: 26px; font-weight: 500; color: #fff; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 0.35rem; }
+  .headline em { color: #7F77DD; font-style: normal; }
+  .sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 1.5rem; }
+
+  .fw-row { display: grid; grid-template-columns: 1fr 36px 1fr; gap: 0; margin-bottom: 1.4rem; align-items: start; }
+  .fw-card { border-radius: 10px; padding: 1rem; border: 1px solid rgba(255,255,255,0.08); }
+  .fw-card.ang-card { background: rgba(221,0,49,0.08); border-color: rgba(221,0,49,0.2); }
+  .fw-card.rea-card { background: rgba(97,218,251,0.06); border-color: rgba(97,218,251,0.18); }
+  .fw-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.7rem; }
+  .fw-name { font-size: 15px; font-weight: 500; }
+  .fw-name.ang { color: #ff4d6a; }
+  .fw-name.rea { color: #61DAFB; }
+  .fw-tag { display: block; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; font-weight: 500; margin-top: 2px; }
+  .fw-tag.ang { background: rgba(221,0,49,0.15); color: #ff6b84; }
+  .fw-tag.rea { background: rgba(97,218,251,0.12); color: #61DAFB; }
+  .fw-list { list-style: none; }
+  .fw-list li { font-size: 11px; color: rgba(255,255,255,0.55); padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
+  .fw-list li:last-child { border-bottom: none; }
+  .li-dot { width: 3px; height: 3px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .li-dot.ang { background: #ff4d6a; }
+  .li-dot.rea { background: #61DAFB; }
+  .vs-center { display: flex; align-items: center; justify-content: center; padding-top: 3.2rem; }
+  .vs-badge { width: 32px; height: 32px; border-radius: 50%; background: #1a1f2e; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.35); }
+
+  .divider { width: 100%; height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 1.25rem; }
+  .reasons-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 0.8rem; }
+  .reasons-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 1.25rem; }
+  .rc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 0.9rem 0.8rem; }
+  .rc-num { font-size: 28px; font-weight: 500; letter-spacing: -0.04em; line-height: 1; margin-bottom: 6px; }
+  .rc-title { font-size: 12px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+  .rc-desc { font-size: 11px; color: rgba(255,255,255,0.38); line-height: 1.5; }
+
+  .verdict { background: rgba(127,119,221,0.1); border: 1px solid rgba(127,119,221,0.25); border-radius: 10px; padding: 1rem 1.1rem; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 1.5rem; }
+  .verdict-icon { width: 30px; height: 30px; border-radius: 8px; background: rgba(127,119,221,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .verdict-text { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.65; }
+  .verdict-text strong { color: #AFA9EC; font-weight: 500; }
+
+  .footer-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem; }
+  .author-info { display: flex; align-items: center; gap: 8px; }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; background: rgba(127,119,221,0.2); border: 1px solid rgba(127,119,221,0.4); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #AFA9EC; }
+  .author-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.65); }
+  .author-domain { font-size: 10px; color: rgba(255,255,255,0.22); font-family: var(--font-mono); }
+  .htags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .htag { font-size: 10px; color: rgba(97,218,251,0.55); }
+
+  @keyframes spin { from{transform:rotate(0deg)}to{transform:rotate(360deg)} }
+  .react-spin { animation: spin 8s linear infinite; transform-origin: 50% 50%; transform-box: fill-box; }
+</style>
+
+<div class="download-wrap">
+  <button class="download-btn" id="dlBtn" onclick="descargar()">
+    <i class="ti ti-download" aria-hidden="true"></i>
+    Descargar PNG
+  </button>
+</div>
+
+<div class="card" id="infografia">
+  <div class="deco-circle"></div>
+  <div class="deco-bottom"></div>
+  <div class="body">
+
+    <div class="top-row">
+      <div class="chip"><span class="chip-dot"></span>Frameworks web &middot; 2026</div>
+      <div class="logo-duo">
+        <div class="logo-circle ang">
+          <svg width="30" height="30" viewBox="0 0 250 250">
+            <polygon points="125,3 242,43 218,196 125,248 32,196 8,43" fill="#DD0031"/>
+            <polygon points="125,3 125,248 32,196 8,43" fill="#C3002F"/>
+            <path d="M125 45L55 205h26l14-34h60l14 34h26zM96 150l29-70 29 70z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="logo-circle rea">
+          <svg width="30" height="30" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="10" fill="#61DAFB"/>
+            <g class="react-spin" fill="none" stroke="#61DAFB" stroke-width="3">
+              <ellipse cx="50" cy="50" rx="44" ry="17"/>
+              <ellipse cx="50" cy="50" rx="44" ry="17" transform="rotate(60 50 50)"/>
+              <ellipse cx="50" cy="50" rx="44" ry="17" transform="rotate(120 50 50)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <p class="headline">Por qu&eacute; dominar <em>m&aacute;s<br>de un</em> framework<br>cambia tu carrera</p>
+    <p class="sub">Angular &amp; React &mdash; no es lealtad, es estrategia</p>
+
+    <div class="fw-row">
+      <div class="fw-card ang-card">
+        <div class="fw-head">
+          <svg width="22" height="22" viewBox="0 0 250 250">
+            <polygon points="125,3 242,43 218,196 125,248 32,196 8,43" fill="#DD0031"/>
+            <polygon points="125,3 125,248 32,196 8,43" fill="#C3002F"/>
+            <path d="M125 45L55 205h26l14-34h60l14 34h26zM96 150l29-70 29 70z" fill="#fff"/>
+          </svg>
+          <div>
+            <div class="fw-name ang">Angular</div>
+            <span class="fw-tag ang">Enterprise</span>
+          </div>
+        </div>
+        <ul class="fw-list">
+          <li><span class="li-dot ang"></span>Framework completo</li>
+          <li><span class="li-dot ang"></span>TypeScript nativo</li>
+          <li><span class="li-dot ang"></span>Banca, gobierno, corp.</li>
+          <li><span class="li-dot ang"></span>Curva alta = menos rival</li>
+        </ul>
+      </div>
+      <div class="vs-center"><div class="vs-badge">vs</div></div>
+      <div class="fw-card rea-card">
+        <div class="fw-head">
+          <svg width="22" height="22" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="10" fill="#61DAFB"/>
+            <g class="react-spin" fill="none" stroke="#61DAFB" stroke-width="3">
+              <ellipse cx="50" cy="50" rx="44" ry="17"/>
+              <ellipse cx="50" cy="50" rx="44" ry="17" transform="rotate(60 50 50)"/>
+              <ellipse cx="50" cy="50" rx="44" ry="17" transform="rotate(120 50 50)"/>
+            </g>
+          </svg>
+          <div>
+            <div class="fw-name rea">React</div>
+            <span class="fw-tag rea">Ecosystem</span>
+          </div>
+        </div>
+        <ul class="fw-list">
+          <li><span class="li-dot rea"></span>Librer&iacute;a de UI flexible</li>
+          <li><span class="li-dot rea"></span>Ecosistema masivo</li>
+          <li><span class="li-dot rea"></span>Startups &amp; SaaS</li>
+          <li><span class="li-dot rea"></span>T&uacute; eliges la arq.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="reasons-label">// por qu&eacute; dominar los dos</p>
+    <div class="reasons-grid">
+      <div class="rc">
+        <div class="rc-num" style="color:#7F77DD">2x</div>
+        <div class="rc-title">Mercado</div>
+        <div class="rc-desc">Accedes a vacantes de uno u otro sin perder ofertas.</div>
+      </div>
+      <div class="rc">
+        <div class="rc-num" style="color:#5DCAA5">+</div>
+        <div class="rc-title">Criterio</div>
+        <div class="rc-desc">Eliges la herramienta seg&uacute;n el proyecto, no por costumbre.</div>
+      </div>
+      <div class="rc">
+        <div class="rc-num" style="color:#EF9F27">&#8734;</div>
+        <div class="rc-title">Transfer.</div>
+        <div class="rc-desc">El segundo framework se aprende 3x m&aacute;s r&aacute;pido.</div>
+      </div>
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-icon">
+        <i class="ti ti-bulb" style="font-size:16px;color:#AFA9EC" aria-hidden="true"></i>
+      </div>
+      <div class="verdict-text">
+        <strong>La industria no busca devs fieles a un framework.</strong> Busca devs que entiendan por qu&eacute; usan lo que usan. Dominar Angular te hace mejor en React &mdash; y viceversa.
+      </div>
+    </div>
+
+    <div class="footer-row">
+      <div class="author-info">
+        <div class="avatar">JA</div>
+        <div>
+          <div class="author-name">Javier Aguilar</div>
+          <div class="author-domain">javieraguilar.dev</div>
+        </div>
+      </div>
+      <div class="htags">
+        <span class="htag">#Angular</span>
+        <span class="htag">#React</span>
+        <span class="htag">#FullStack</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+function descargar() {
+  const btn = document.getElementById('dlBtn');
+  btn.innerHTML = '<i class="ti ti-loader"></i> Generando...';
+  btn.disabled = true;
+  html2canvas(document.getElementById('infografia'), {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: null,
+    logging: false
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'infografia_javieraguilar.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    btn.innerHTML = '<i class="ti ti-check"></i> Descargado';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="ti ti-download"></i> Descargar PNG';
+      btn.disabled = false;
+    }, 2000);
+  });
+}
+</script>
