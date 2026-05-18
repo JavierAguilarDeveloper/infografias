@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; display: flex; flex-direction: column; align-items: center; padding: 24px 16px; font-family: 'Inter', sans-serif; }
+
+#download-btn {
+  margin-bottom: 18px;
+  background: #fff;
+  color: #111;
+  border: 2px solid #333;
+  padding: 11px 32px;
+  border-radius: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+#download-btn:hover { background: #f0f0f0; }
+
+#infografia {
+  width: 760px;
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  overflow: hidden;
+  position: relative;
+}
+
+.hdr {
+  position: relative;
+  background: #111;
+  border-bottom: 1px solid #1e1e1e;
+  padding: 32px 40px 28px;
+  z-index: 1;
+  overflow: hidden;
+}
+.java-logo-img {
+  position: absolute;
+  top: 16px;
+  right: 32px;
+  width: 115px;
+  height: 115px;
+  z-index: 2;
+  object-fit: contain;
+}
+.hdr-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.badge-lunes {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e55a00;
+  border: 1px solid #e55a00;
+  padding: 5px 12px;
+  border-radius: 3px;
+}
+.badge-debate {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #444;
+  border: 1px solid #222;
+  padding: 5px 12px;
+  border-radius: 3px;
+}
+.main-q {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5.6rem;
+  line-height: 0.88;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+}
+.main-q span { color: #e55a00; }
+.sub-q {
+  font-size: 0.87rem;
+  color: #555;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+.verdict-strip {
+  position: relative;
+  z-index: 1;
+  background: #e55a00;
+  padding: 13px 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.verdict-txt {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  color: #fff;
+}
+.verdict-pill {
+  background: #fff;
+  color: #e55a00;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 13px;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+}
+
+.body-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  padding: 32px 40px;
+  gap: 0;
+}
+.divider-v {
+  background: #1e1e1e;
+  width: 1px;
+  margin: 0 28px;
+}
+.col-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.col-title.dead  { color: #ff3b3b; }
+.col-title.alive { color: #3ddc84; }
+.arg-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-bottom: 16px;
+}
+.arg-icon { font-size: 1.05rem; flex-shrink: 0; margin-top: 2px; }
+.arg-text { font-size: 0.9rem; line-height: 1.55; color: #bbb; }
+.arg-text strong { color: #fff; font-weight: 700; }
+
+.stats-row {
+  position: relative;
+  z-index: 1;
+  background: #111;
+  border-top: 1px solid #1e1e1e;
+  border-bottom: 1px solid #1e1e1e;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 22px 40px;
+  gap: 0;
+}
+.stat-item {
+  text-align: center;
+  border-right: 1px solid #1e1e1e;
+  padding: 0 16px;
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.4rem;
+  color: #e55a00;
+  line-height: 1;
+  display: block;
+}
+.stat-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: #444;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+.opinion-bomb {
+  position: relative;
+  z-index: 1;
+  padding: 26px 40px;
+  border-bottom: 1px solid #1e1e1e;
+}
+.bomb-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.67rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e55a00;
+  margin-bottom: 12px;
+}
+.bomb-text {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.5;
+  border-left: 3px solid #e55a00;
+  padding-left: 18px;
+}
+.bomb-text em { color: #e55a00; font-style: normal; }
+
+.vote-section {
+  position: relative;
+  z-index: 1;
+  padding: 22px 40px;
+  border-bottom: 1px solid #1e1e1e;
+}
+.vote-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.67rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #444;
+  margin-bottom: 14px;
+}
+.vote-options { display: flex; gap: 10px; }
+.vote-opt {
+  flex: 1;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 13px 10px;
+  text-align: center;
+}
+.vote-opt.fire  { border-color: rgba(255,59,59,0.25);  background: rgba(255,59,59,0.06); }
+.vote-opt.check { border-color: rgba(61,220,132,0.25); background: rgba(61,220,132,0.06); }
+.vote-opt.coffee{ border-color: rgba(229,90,0,0.25);   background: rgba(229,90,0,0.06); }
+.vote-opt.brain { border-color: rgba(91,141,246,0.25); background: rgba(91,141,246,0.06); }
+.vote-emoji { font-size: 1.7rem; display: block; margin-bottom: 7px; }
+.vote-txt {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.63rem;
+  color: #666;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.footer-strip {
+  position: relative;
+  z-index: 1;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.author-info {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.67rem;
+  color: #383838;
+  letter-spacing: 0.07em;
+  line-height: 1.85;
+}
+.author-info span { color: #e55a00; }
+.hashtags {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: #2a2a2a;
+  letter-spacing: 0.05em;
+  text-align: right;
+  line-height: 1.9;
+}
+</style>
+</head>
+<body>
+
+<button id="download-btn" onclick="descargar()">&darr; Descargar PNG</button>
+
+<div id="infografia">
+
+  <div class="hdr">
+    <!-- Logo Java como canvas dibujado en JS para que html2canvas lo capture -->
+    <canvas id="javaLogoCanvas" class="java-logo-img" width="115" height="115"></canvas>
+
+    <div class="hdr-top">
+      <span class="badge-lunes">Lunes de debate</span>
+      <span class="badge-debate">#JavaDeveloper</span>
+    </div>
+    <div class="main-q">
+      &iquest;JAVA<br>EST&Aacute;<br><span>MUERTO?</span>
+    </div>
+    <div class="sub-q">// La pregunta que divide a la comunidad cada a&ntilde;o</div>
+  </div>
+
+  <div class="verdict-strip">
+    <span class="verdict-txt">Mi veredicto despu&eacute;s de a&ntilde;os en producci&oacute;n:</span>
+    <span class="verdict-pill">Para nada. Pero s&iacute; est&aacute; cambiando</span>
+  </div>
+
+  <div class="body-grid">
+    <div>
+      <div class="col-title dead">// Los que lo dan por muerto dicen</div>
+      <div class="arg-item">
+        <span class="arg-icon">&#128128;</span>
+        <div class="arg-text"><strong>Verboso y lento de escribir</strong> &mdash; Python o Kotlin hacen lo mismo en menos c&oacute;digo</div>
+      </div>
+      <div class="arg-item">
+        <span class="arg-icon">&#128128;</span>
+        <div class="arg-text"><strong>Startups huyen de &eacute;l</strong> &mdash; Node, Go y Python dominan en greenfield</div>
+      </div>
+      <div class="arg-item">
+        <span class="arg-icon">&#128128;</span>
+        <div class="arg-text"><strong>Los juniors ya no lo aprenden primero</strong> &mdash; JS y Python ganaron la batalla educativa</div>
+      </div>
+      <div class="arg-item">
+        <span class="arg-icon">&#128128;</span>
+        <div class="arg-text"><strong>Stack legacy</strong> &mdash; asociado a proyectos viejos, monolitos y burocracia</div>
+      </div>
+    </div>
+
+    <div class="divider-v"></div>
+
+    <div>
+      <div class="col-title alive">// La realidad en el mercado</div>
+      <div class="arg-item">
+        <span class="arg-icon">&#128640;</span>
+        <div class="arg-text"><strong>Spring Boot + microservicios</strong> &mdash; sigue siendo el est&aacute;ndar enterprise real</div>
+      </div>
+      <div class="arg-item">
+        <span class="arg-icon">&#128640;</span>
+        <div class="arg-text"><strong>Java 21 con Virtual Threads</strong> &mdash; rendimiento al nivel de Go sin cambiar el stack</div>
+      </div>
+      <div class="arg-item">
+        <span class="arg-icon">&#128640;</span>
+        <div class="arg-text"><strong>Mercado laboral brutal</strong> &mdash; sueldos Java senior entre los m&aacute;s altos</div>
+      </div>
+      <div class="arg-item">
+        <span class="arg-icon">&#128640;</span>
+        <div class="arg-text"><strong>Banca, salud, gobierno</strong> &mdash; sectores que mueven billones corren en Java</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-item">
+      <span class="stat-num">#3</span>
+      <div class="stat-lbl">TIOBE Index<br>2024</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">28+</span>
+      <div class="stat-lbl">A&ntilde;os en<br>producci&oacute;n</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">9M+</span>
+      <div class="stat-lbl">Devs activos<br>en el mundo</div>
+    </div>
+  </div>
+
+  <div class="opinion-bomb">
+    <div class="bomb-label">// mi opini&oacute;n t&eacute;cnica</div>
+    <div class="bomb-text">
+      Java no est&aacute; muriendo &mdash; est&aacute; <em>filtrando</em>.<br>
+      Los que lo abandonan buscan velocidad de prototipado.<br>
+      Los que se quedan, construyen sistemas que <em>duran d&eacute;cadas</em>.
+    </div>
+  </div>
+
+  <div class="vote-section">
+    <div class="vote-label">// reacciona y deja tu opini&oacute;n en los comentarios</div>
+    <div class="vote-options">
+      <div class="vote-opt fire">
+        <span class="vote-emoji">&#128293;</span>
+        <div class="vote-txt">Java<br>muerto ya</div>
+      </div>
+      <div class="vote-opt check">
+        <span class="vote-emoji">&#9989;</span>
+        <div class="vote-txt">Sigue<br>evolucionando</div>
+      </div>
+      <div class="vote-opt coffee">
+        <span class="vote-emoji">&#9749;</span>
+        <div class="vote-txt">Depende<br>del proyecto</div>
+      </div>
+      <div class="vote-opt brain">
+        <span class="vote-emoji">&#129504;</span>
+        <div class="vote-txt">Kotlin lo<br>reemplaz&oacute;</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <div class="author-info">
+      <span>Javier Aguilar</span> &middot; javieraguilar.dev<br>
+      Full Stack Dev &middot; Angular &middot; Java &middot; Spring Boot
+    </div>
+    <div class="hashtags">
+      #Java #SpringBoot #FullStack<br>
+      #BackendDev #LunesDeDebate
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Dibuja el logo Java con Canvas puro (100% capturado por html2canvas) ──
+function drawJavaLogo() {
+  const canvas = document.getElementById('javaLogoCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = 115, H = 115;
+  ctx.clearRect(0, 0, W, H);
+
+  const orange = '#e55a00';
+  const darkOrange = '#c44d00';
+  const lightOrange = '#ff7a1a';
+
+  // ── Vapores ──
+  function drawSteam(x1, y1, x2, y2, x3, y3, color) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.quadraticCurveTo(x2, y2, x3, y3);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+  // Escala: viewBox 100x135 → canvas 115x115 => factor x=1.15, y=0.85
+  const sx = 115/100, sy = 115/135;
+
+  function s(x, y) { return [x*sx, y*sy]; }
+
+  // Vapor izquierdo
+  ctx.beginPath();
+  ctx.moveTo(...s(35,60)); ctx.quadraticCurveTo(...s(30,48), ...s(35,37));
+  ctx.strokeStyle = orange; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(...s(35,37)); ctx.quadraticCurveTo(...s(40,26), ...s(35,15));
+  ctx.strokeStyle = orange; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke();
+
+  // Vapor centro
+  ctx.beginPath();
+  ctx.moveTo(...s(50,57)); ctx.quadraticCurveTo(...s(45,45), ...s(50,34));
+  ctx.strokeStyle = lightOrange; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(...s(50,34)); ctx.quadraticCurveTo(...s(55,23), ...s(50,12));
+  ctx.strokeStyle = lightOrange; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke();
+
+  // Vapor derecho
+  ctx.beginPath();
+  ctx.moveTo(...s(65,60)); ctx.quadraticCurveTo(...s(60,48), ...s(65,37));
+  ctx.strokeStyle = orange; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(...s(65,37)); ctx.quadraticCurveTo(...s(70,26), ...s(65,15));
+  ctx.strokeStyle = orange; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke();
+
+  // ── Cuerpo taza exterior (sombra) ──
+  ctx.beginPath();
+  ctx.moveTo(...s(22,68));
+  ctx.quadraticCurveTo(...s(20,88), ...s(24,97));
+  ctx.quadraticCurveTo(...s(29,110), ...s(50,112));
+  ctx.quadraticCurveTo(...s(71,110), ...s(76,97));
+  ctx.quadraticCurveTo(...s(80,88), ...s(78,68));
+  ctx.closePath();
+  ctx.fillStyle = darkOrange;
+  ctx.fill();
+
+  // ── Cuerpo taza interior ──
+  ctx.beginPath();
+  ctx.moveTo(...s(25,68));
+  ctx.quadraticCurveTo(...s(23,87), ...s(27,96));
+  ctx.quadraticCurveTo(...s(32,108), ...s(50,110));
+  ctx.quadraticCurveTo(...s(68,108), ...s(73,96));
+  ctx.quadraticCurveTo(...s(77,87), ...s(75,68));
+  ctx.closePath();
+  ctx.fillStyle = orange;
+  ctx.fill();
+
+  // ── Brillo ──
+  ctx.beginPath();
+  ctx.moveTo(...s(30,72));
+  ctx.quadraticCurveTo(...s(28,84), ...s(30,93));
+  ctx.quadraticCurveTo(...s(33,103), ...s(42,107));
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+  ctx.lineWidth = 2.5;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // ── Asa exterior ──
+  ctx.beginPath();
+  ctx.moveTo(...s(75,76));
+  ctx.quadraticCurveTo(...s(92,76), ...s(92,90));
+  ctx.quadraticCurveTo(...s(92,104), ...s(75,104));
+  ctx.strokeStyle = darkOrange;
+  ctx.lineWidth = 6;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // ── Asa interior ──
+  ctx.beginPath();
+  ctx.moveTo(...s(75,76));
+  ctx.quadraticCurveTo(...s(88,76), ...s(88,90));
+  ctx.quadraticCurveTo(...s(88,104), ...s(75,104));
+  ctx.strokeStyle = orange;
+  ctx.lineWidth = 3.5;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // ── Texto JAVA ──
+  ctx.font = 'bold 18px Arial Black, Arial, sans-serif';
+  ctx.fillStyle = orange;
+  ctx.textAlign = 'center';
+  ctx.letterSpacing = '4px';
+  ctx.fillText('JAVA', W/2, H - 2);
+}
+
+drawJavaLogo();
+
+// ── Descarga ──
+function descargar() {
+  const el = document.getElementById('infografia');
+  html2canvas(el, {
+    scale: 2,
+    backgroundColor: '#0d0d0d',
+    useCORS: true,
+    logging: false,
+    allowTaint: true
+  }).then(canvas => {
+    const a = document.createElement('a');
+    a.download = 'java-muerto-infografia.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  });
+}
+</script>
+
+</body>
+</html>
