@@ -1,0 +1,477 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&family=Familjen+Grotesk:wght@400;500;700&display=swap');
+
+  #infog-root {
+    width: 680px;
+    max-width: 100%;
+    background: #080b10;
+    color: #dde3f0;
+    font-family: 'Familjen Grotesk', sans-serif;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+  }
+
+  #infog-inner {
+    padding: 40px 44px 36px;
+  }
+
+  .mono { font-family: 'Azeret Mono', monospace; }
+
+  .eyebrow {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e8643a;
+    margin-bottom: 6px;
+  }
+
+  .main-title {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.05;
+    color: #fff;
+    letter-spacing: -0.025em;
+    margin-bottom: 4px;
+  }
+
+  .main-title em {
+    font-style: italic;
+    color: #e8643a;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #8b93a8;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  /* Loop diagram */
+  .loop-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .loop-step {
+    background: #131720;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 14px 12px;
+    position: relative;
+    text-align: center;
+  }
+
+  .loop-step-num {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 10px;
+    color: #e8643a;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .loop-step-icon {
+    font-size: 20px;
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+
+  .loop-step-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 3px;
+    letter-spacing: -0.01em;
+  }
+
+  .loop-step-desc {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 9px;
+    color: #8b93a8;
+    line-height: 1.5;
+  }
+
+  .arrow-connector {
+    position: absolute;
+    right: -13px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #e8643a;
+    z-index: 2;
+  }
+
+  /* Components grid */
+  .section-label {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8b93a8;
+    margin-bottom: 12px;
+  }
+
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .comp-card {
+    background: #131720;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 14px 14px;
+  }
+
+  .comp-card.accent {
+    border-color: rgba(232,100,58,0.35);
+    background: rgba(232,100,58,0.06);
+  }
+
+  .comp-icon {
+    font-size: 16px;
+    margin-bottom: 7px;
+  }
+
+  .comp-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .comp-desc {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 9px;
+    color: #8b93a8;
+    line-height: 1.6;
+  }
+
+  /* vs reactive */
+  .vs-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .vs-card {
+    background: #131720;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .vs-title {
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .vs-title .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .vs-list {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+
+  .vs-list li {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 9px;
+    color: #8b93a8;
+    line-height: 1.9;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .vs-list li::before {
+    content: '→';
+    color: #5b8df6;
+    flex-shrink: 0;
+  }
+
+  .vs-card.warm .vs-list li::before {
+    color: #e8643a;
+  }
+
+  /* Examples row */
+  .examples-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .ex-pill {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 5px 12px;
+    color: #dde3f0;
+    background: #1a1f2e;
+  }
+
+  .ex-pill.hi {
+    border-color: rgba(232,100,58,0.4);
+    color: #e8643a;
+    background: rgba(232,100,58,0.08);
+  }
+
+  /* Stat row */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .stat-box {
+    background: #0e1117;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 26px;
+    font-weight: 700;
+    color: #e8643a;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.1em;
+    color: #8b93a8;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin: 0 0 20px;
+  }
+
+  /* Footer */
+  .infog-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-brand {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: #e8643a;
+    font-weight: 500;
+  }
+
+  .footer-tag {
+    font-family: 'Azeret Mono', monospace;
+    font-size: 9px;
+    color: #8b93a8;
+    letter-spacing: 0.1em;
+  }
+
+  /* Download btn */
+  #dl-btn {
+    display: block;
+    margin: 16px auto 0;
+    padding: 9px 24px;
+    background: #fff;
+    color: #080b10;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Azeret Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  #dl-btn:hover { background: #f0f0f0; }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<div id="infog-root">
+  <div id="infog-inner">
+
+    <p class="eyebrow">Inteligencia Artificial &middot; 2026</p>
+    <h1 class="main-title">C&oacute;mo funciona un<br><em>Agente de IA</em></h1>
+    <p class="subtitle">No es magia. Es un bucle de cuatro pasos que se repite hasta resolver la tarea.</p>
+
+    <!-- LOOP -->
+    <div class="loop-section">
+      <div class="loop-step">
+        <div class="loop-step-num">01</div>
+        <div class="loop-step-icon">&#128065;</div>
+        <div class="loop-step-label">Percibe</div>
+        <div class="loop-step-desc">Lee el entorno:<br>texto, datos, API</div>
+        <span class="arrow-connector">&#8594;</span>
+      </div>
+      <div class="loop-step">
+        <div class="loop-step-num">02</div>
+        <div class="loop-step-icon">&#129504;</div>
+        <div class="loop-step-label">Razona</div>
+        <div class="loop-step-desc">LLM decide el<br>siguiente paso</div>
+        <span class="arrow-connector">&#8594;</span>
+      </div>
+      <div class="loop-step">
+        <div class="loop-step-num">03</div>
+        <div class="loop-step-icon">&#9881;</div>
+        <div class="loop-step-label">Act&uacute;a</div>
+        <div class="loop-step-desc">Ejecuta herramientas,<br>escribe c&oacute;digo</div>
+        <span class="arrow-connector">&#8594;</span>
+      </div>
+      <div class="loop-step">
+        <div class="loop-step-num">04</div>
+        <div class="loop-step-icon">&#128257;</div>
+        <div class="loop-step-label">Observa</div>
+        <div class="loop-step-desc">Eval&uacute;a resultado,<br>repite si no logr&oacute;</div>
+      </div>
+    </div>
+
+    <!-- COMPONENTES -->
+    <p class="section-label">// componentes internos</p>
+    <div class="comp-grid">
+      <div class="comp-card accent">
+        <div class="comp-icon">&#129504;</div>
+        <div class="comp-name">LLM Core</div>
+        <div class="comp-desc">El &quot;cerebro&quot;. GPT-4, Claude, Gemini. Decide qu&eacute; hacer con el contexto disponible.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">&#128295;</div>
+        <div class="comp-name">Herramientas</div>
+        <div class="comp-desc">APIs, b&uacute;squeda web, ejecuci&oacute;n de c&oacute;digo, base de datos. Lo que el LLM no sabe, lo busca.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">&#128190;</div>
+        <div class="comp-name">Memoria</div>
+        <div class="comp-desc">Short-term (contexto), Long-term (vector DB). Recuerda entre turnos y sesiones.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">&#127919;</div>
+        <div class="comp-name">Planner</div>
+        <div class="comp-desc">Descompone objetivos complejos en subtareas secuenciales o paralelas.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">&#128272;</div>
+        <div class="comp-name">Guardrails</div>
+        <div class="comp-desc">L&iacute;mites de seguridad. Eval&uacute;a si la acci&oacute;n es permitida antes de ejecutar.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-icon">&#128202;</div>
+        <div class="comp-name">Feedback</div>
+        <div class="comp-desc">Observa el resultado de cada acci&oacute;n. Si fall&oacute;, ajusta la estrategia.</div>
+      </div>
+    </div>
+
+    <!-- VS -->
+    <p class="section-label">// agente vs chatbot</p>
+    <div class="vs-section">
+      <div class="vs-card">
+        <div class="vs-title"><span class="dot" style="background:#5b8df6;"></span>Chatbot cl&aacute;sico</div>
+        <ul class="vs-list">
+          <li>Responde a una sola entrada</li>
+          <li>Sin memoria persistente</li>
+          <li>No ejecuta acciones externas</li>
+          <li>Flujo controlado por el usuario</li>
+        </ul>
+      </div>
+      <div class="vs-card warm">
+        <div class="vs-title"><span class="dot" style="background:#e8643a;"></span>Agente de IA</div>
+        <ul class="vs-list">
+          <li>Loop aut&oacute;nomo multi-paso</li>
+          <li>Memoria entre sesiones</li>
+          <li>Llama APIs, escribe archivos</li>
+          <li>Se autodirige hasta lograr el objetivo</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num">ReAct</div>
+        <div class="stat-label">Patr&oacute;n m&aacute;s<br>usado</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">RAG</div>
+        <div class="stat-label">Memoria<br>externa</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">MCP</div>
+        <div class="stat-label">Est&aacute;ndar de<br>herramientas 2025</div>
+      </div>
+    </div>
+
+    <!-- EXAMPLES -->
+    <p class="section-label">// agentes reales hoy</p>
+    <div class="examples-row">
+      <span class="ex-pill hi">Claude Code</span>
+      <span class="ex-pill">GitHub Copilot Workspace</span>
+      <span class="ex-pill">Devin (Cognition)</span>
+      <span class="ex-pill">AutoGPT</span>
+      <span class="ex-pill">OpenAI Operator</span>
+      <span class="ex-pill hi">LangGraph</span>
+      <span class="ex-pill">CrewAI</span>
+    </div>
+
+    <hr class="divider">
+
+    <div class="infog-footer">
+      <span class="footer-brand">javieraguilar.dev</span>
+      <span class="footer-tag">#IA &nbsp;&middot;&nbsp; #Agentes &nbsp;&middot;&nbsp; #FullStack &nbsp;&middot;&nbsp; #Angular</span>
+    </div>
+
+  </div>
+</div>
+
+<button id="dl-btn">&#11015; Descargar PNG</button>
+
+<script>
+document.getElementById('dl-btn').addEventListener('click', function() {
+  var btn = this;
+  btn.textContent = 'Generando...';
+  html2canvas(document.getElementById('infog-root'), {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: '#080b10'
+  }).then(function(canvas) {
+    var link = document.createElement('a');
+    link.download = 'agentes-ia-javieraguilar.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    btn.textContent = '\u2713 Listo';
+    setTimeout(function(){ btn.textContent = '\u2B07 Descargar PNG'; }, 2000);
+  });
+});
+</script>
